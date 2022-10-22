@@ -1,0 +1,22 @@
+#define _CRT_SECURE_NO_WARNINGS 1
+
+#include<stdio.h>
+int check_sys()
+{
+	//只要能判断出是大端还是小端就行，a的值就自己取简单的
+	int a = 1;
+	//返回1，小端
+	//返回0，大端
+	//强制类型转换为char* 访问步长为1字节
+	return *(char*)&a;
+}
+
+int main()
+{
+	int ret = check_sys();
+	if (ret)
+		printf("小端\n");
+	else
+		printf("大端\n");
+	return 0;
+}
