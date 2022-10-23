@@ -1,0 +1,19 @@
+#define _CRT_SECURE_NO_WARNINGS 1
+
+#include<stdio.h>
+
+/*思路：
+unsigned char 能储存的范围是0-255
+所以这里的i<=255是恒成立的导致死循环
+所以在使用无符号数时一定要注意判断条件
+不然容易出现死循环*/
+
+unsigned char i = 0;
+int main()
+{
+	for (i = 0; i <= 255; i++)
+	{
+		printf("hellow world\n");//死循环
+	}
+	return 0;
+}
