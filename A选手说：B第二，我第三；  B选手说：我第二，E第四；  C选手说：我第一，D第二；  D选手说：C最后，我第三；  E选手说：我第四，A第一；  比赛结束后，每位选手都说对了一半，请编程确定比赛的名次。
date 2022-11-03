@@ -1,0 +1,64 @@
+#define _CRT_SECURE_NO_WARNINGS 1
+
+/*思路：
+用五层循环将所有可能的排名列出来
+符合判断条件并且没有排名重复的就是正确的排名*/
+#include<stdio.h>
+
+int paratactic(int arr[])
+{
+	/*思路：
+	a b c d e
+	让a分别与b c d e对比没有相同则不再去对比a
+	b c d e
+	让b分别与c d e对比
+	要注意a b c d e的下标一直都是0 1 2 3 4*/
+	int i = 0;
+	int j = 0;
+	for (i = 0; i < 4; i++)
+	{
+		for (j = i+1; j < 5; j++)
+		{
+			if (arr[i] == arr[j])
+			{
+				return 0;//相同后则不在对比返回0
+			}
+		}
+	}
+	return 1;//只有全都不同才能出循环
+}
+
+int main()
+{
+	int arr[5];
+	for (arr[0] = 1; arr[0] <= 5; arr[0]++)
+	{
+		for (arr[1] = 1; arr[1] <= 5; arr[1]++)
+		{
+			for (arr[2] = 1; arr[2] <= 5; arr[2]++)
+			{
+				for (arr[3] = 1; arr[3] <= 5; arr[3]++)
+				{
+					for (arr[4] = 1; arr[4] <= 5; arr[4]++)
+					{
+						if ((arr[1] == 2) + (arr[0] == 3) == 1 && //A:B第二，我第三
+							(arr[1] == 2) + (arr[4] == 4) == 1 && //B:我第二，E第四
+							(arr[2] == 1) + (arr[3] == 2) == 1 && //C:我第一，D第二
+							(arr[2] == 5) + (arr[3] == 3) == 1 && //D:C最后，我第三
+							(arr[4] == 4) + (arr[0] == 1) == 1 && //E:我第四，A第一
+							paratactic(arr) //当paratactic返回为0，则条件为假，不进入if
+							)
+						{
+							int i = 0;
+							for (i = 0; i < 5; i++)
+							{
+								printf("%d ", arr[i]);
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+	return 0;
+}
