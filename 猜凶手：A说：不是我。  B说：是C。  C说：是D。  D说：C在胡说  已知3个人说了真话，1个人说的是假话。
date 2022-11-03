@@ -1,0 +1,53 @@
+#define _CRT_SECURE_NO_WARNINGS 1
+
+/*思路：
+定义A,B,C,D为0，1，2，3
+使用数组定义多个变量
+
+再使用for循环的到不同的i值
+当i==0==A==0时，表示假设A是凶手
+i==1时，表示假设B是凶手
+i就是用来表示凶手的
+
+这时再来判断他们所说的话的真假
+A:不是我；0代表A，即a不等于i（0！=i）成立则A说的为真，否则为假
+
+B;是C；2代表C，即C等于i（i==C）成立则A说的为真，否则为假
+
+C：与B同理；
+
+D：C胡说；则D意思为不是我，和A相同*/
+#include<stdio.h>
+
+int Is_killer()
+{
+	int arr[4] = { 0, 1, 2, 3 };
+	int i = 0;
+	for (i = 0; i<4; i++)
+	{
+		int true = 0;//每次循环都要把true清零
+
+		if (arr[0] != i)//A:不是我
+			true++;
+
+		if (arr[2] == i)//B:是C
+			true++;
+
+		if (arr[3] == i)//C:是D
+			true++;
+
+		if (arr[3] != i)//D:C胡说
+			true++;
+
+		if (true >=3)
+			break;
+	}
+	return i;
+}
+
+int main()
+{
+	int ret=Is_killer();
+	printf("%c是凶手\n", ret + 65);//返回值为i，65是A的ASCII码值，i+65可以得到ABCD的ASCII码值，%c打印字符
+	return 0;
+}
