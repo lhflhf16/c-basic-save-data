@@ -1,0 +1,16 @@
+#include<stdio.h>
+
+int main()
+{
+	int killer = 0;
+	//循环来依次假设不同的人为凶手
+	for (killer = 'A'; killer <= 'D'; killer++)
+	{
+		//当不同的人为凶手时，以下四个判断条件会为1/0，满足三真一假即可
+		if ((('A' != killer) + ('C' == killer) + ('D' == killer) + ('D' != killer)) == 3)
+		{
+			printf("killer=%c\n", killer);
+		}
+	}
+	return 0;
+}
